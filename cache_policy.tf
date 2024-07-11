@@ -1,4 +1,6 @@
 resource "aws_cloudfront_cache_policy" "fpjs-procdn-cache-policy" {
+    count = var.create_new_distribution ? 1 : 0
+
     name = "FingerprintProCDNCachePolicy-${local.integration_id}"
     default_ttl = 180
     max_ttl = 180
