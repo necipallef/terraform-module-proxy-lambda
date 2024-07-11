@@ -36,7 +36,7 @@ resource "aws_cloudfront_distribution" "fpjs_cloudfront_distribution" {
     default_cache_behavior {
         allowed_methods = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
         cached_methods = ["GET", "HEAD"]
-        cache_policy_id = aws_cloudfront_cache_policy[0].fpjs-procdn-cache-policy.id
+        cache_policy_id = aws_cloudfront_cache_policy.fpjs-procdn-cache-policy[0].id
         origin_request_policy_id = "216adef6-5c7f-47e4-b989-5492eafa07d3" # Default AllViewer policy
         target_origin_id = local.fpcdn_origin_id
         viewer_protocol_policy = "https-only"
