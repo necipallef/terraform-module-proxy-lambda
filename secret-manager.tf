@@ -44,3 +44,7 @@ resource "aws_secretsmanager_secret_version" "paths" {
         }
     )
 }
+
+output "fpjs_secret_manager_arn" {
+    value = aws_secretsmanager_secret.secret-manager-secret-created-by-terraform.arn
+}
