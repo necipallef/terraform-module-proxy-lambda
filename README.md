@@ -82,7 +82,7 @@
     ```
 3. Run `terraform plan`, if all looks good run `terraform apply`
 
-> [!INFO]
+> [!NOTE]
 > If your project doesn't use `hashicorp/random` module, then you will need to run `terraform init -upgrade`.
 
 ## Todo
