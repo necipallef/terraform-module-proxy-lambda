@@ -88,5 +88,6 @@
 ## Todo
 - [ ] Support for `DomainNames` for newly created CloudFront distribution
 - [ ] Support for `ACMCertificateARN`
+- [ ] Fields like `price_class` should be configurable with a default value
 - [ ] management lambda related resources
 - [ ] publish on Hashicorp account
