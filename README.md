@@ -17,7 +17,7 @@
     ```
 4. Run `terraform plan`, if all looks good run `terraform apply`
 
-### Using existing Cloudfront distribution
+### Using existing CloudFront distribution
 
 1. Create a file called `fingerprint.tf` and add below content:
     ```terraform
