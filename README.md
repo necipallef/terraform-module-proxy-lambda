@@ -3,8 +3,7 @@
 ### Using a new CloudFront distribution
 
 1. Create a new directory `mkdir fingerprint_integration` and go inside `cd fingerprint_integration`
-2. Run `terraform init`
-3. Create a file `touch main.tf` and add below content, do not forget to replace placeholders (`AGENT_DOWNLOAD_PATH_HERE`, `RESULT_PATH_HERE`, `PROXY_SECRET_HERE`):
+2. Create a file `touch main.tf` and add below content, do not forget to replace placeholders (`AGENT_DOWNLOAD_PATH_HERE`, `RESULT_PATH_HERE`, `PROXY_SECRET_HERE`):
     ```terraform
     module "fingerprint_cloudfront_integration" {
       source = "git@github.com:necipallef/terraform-module-proxy-lambda.git/?ref=v0.3.0"
@@ -15,6 +14,7 @@
       fpjs_pre_shared_secret = "PROXY_SECRET_HERE"
     }
     ```
+3. Run `terraform init`
 4. Run `terraform plan`, if all looks good run `terraform apply`
 
 ### Using existing CloudFront distribution
