@@ -3,7 +3,7 @@
 ### Using a new CloudFront distribution
 
 1. Create a new directory `mkdir fingerprint_integration` and go inside `cd fingerprint_integration`
-2. Create a file `touch main.tf` and add below content, do not forget to replace placeholders (`AGENT_DOWNLOAD_PATH_HERE`, `RESULT_PATH_HERE`, `PROXY_SECRET_HERE`):
+2. Create a file `touch fingerprint.tf` and add below content, do not forget to replace placeholders (`AGENT_DOWNLOAD_PATH_HERE`, `RESULT_PATH_HERE`, `PROXY_SECRET_HERE`):
     ```terraform
     module "fingerprint_cloudfront_integration" {
       source = "git@github.com:necipallef/terraform-module-proxy-lambda.git/?ref=v0.3.0"
@@ -14,12 +14,70 @@
       fpjs_pre_shared_secret = "PROXY_SECRET_HERE"
     }
     ```
-3. Run `terraform init`
-4. Run `terraform plan`, if all looks good run `terraform apply`
+3. Create a file called `cloudfront_distribution.tf` and add below content (feel free to make any changes that makes sense for your setup):
+   ```terraform
+   locals {
+       fpcdn_origin_id = "fpcdn.io"
+   }
+   
+   resource "aws_cloudfront_distribution" "fpjs_cloudfront_distribution" {
+       count = var.create_new_distribution ? 1 : 0
+       comment = "Fingerprint distribution (created via Terraform)"
+   
+       origin {
+           domain_name = "fpcdn.io"
+           origin_id = local.fpcdn_origin_id
+           custom_origin_config {
+               origin_protocol_policy = "https-only"
+               http_port = 80
+               https_port = 443
+               origin_ssl_protocols = ["TLSv1.2"]
+           }
+           custom_header {
+               name = "FPJS_SECRET_NAME"
+               value = aws_secretsmanager_secret.secret-manager-secret-created-by-terraform.arn
+           }
+       }
+   
+       enabled = true
+   
+       http_version = "http1.1"
+   
+       price_class = "PriceClass_100"
+   
+       default_cache_behavior {
+           allowed_methods = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
+           cached_methods = ["GET", "HEAD"]
+           cache_policy_id = aws_cloudfront_cache_policy.fpjs-procdn-cache-policy.id
+           origin_request_policy_id = "216adef6-5c7f-47e4-b989-5492eafa07d3" # Default AllViewer policy
+           target_origin_id = local.fpcdn_origin_id
+           viewer_protocol_policy = "https-only"
+           compress = true
+   
+           lambda_function_association {
+               event_type = "origin-request"
+               lambda_arn = aws_lambda_function.fpjs_proxy_lambda.qualified_arn
+               include_body = true
+           }
+       }
+   
+       viewer_certificate {
+           cloudfront_default_certificate = true
+       }
+   
+       restrictions {
+           geo_restriction {
+               restriction_type = "none"
+           }
+       }
+   }
+   ```
+4. Run `terraform init`
+5. Run `terraform plan`, if all looks good run `terraform apply`
 
 ### Using existing CloudFront distribution
 
-1. Create a file called `fingerprint.tf` and add below content:
+1. Create a file called `fingerprint.tf` and add below content, do not forget to replace placeholders (`AGENT_DOWNLOAD_PATH_HERE`, `RESULT_PATH_HERE`, `PROXY_SECRET_HERE`):
     ```terraform
     module "fingerprint_cloudfront_integration" {
         source = "git@github.com:necipallef/terraform-module-proxy-lambda.git/?ref=v0.3.0"
@@ -35,7 +93,7 @@
     }
 
     ```
-2. Go to your CloudFront distribution block and add below content, do not forget to replace placeholders (`AGENT_DOWNLOAD_PATH_HERE`, `RESULT_PATH_HERE`, `PROXY_SECRET_HERE`, `YOUR_INTEGRATION_PATH_HERE`):
+2. Go to your CloudFront distribution block and add below content, do not forget to replace placeholders (`YOUR_INTEGRATION_PATH_HERE`):
     ```terraform
     resource "aws_cloudfront_distribution" "cloudfront_dist" {
       // more code here
@@ -86,8 +144,5 @@
 > If your project doesn't use `hashicorp/random` module, then you will need to run `terraform init -upgrade`.
 
 ## Todo
-- [ ] Support for `DomainNames` for newly created CloudFront distribution
-- [ ] Support for `ACMCertificateARN`
-- [ ] Fields like `price_class` should be configurable with a default value
-- [ ] management lambda related resources
+- [ ] Support for `DomainNames` and `ACMCertificateARN` for newly created CloudFront distribution code example
 - [ ] publish on Hashicorp account
