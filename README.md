@@ -33,7 +33,7 @@
            }
            custom_header {
                name = "FPJS_SECRET_NAME"
-               value = aws_secretsmanager_secret.secret-manager-secret-created-by-terraform.arn
+               value = module.fingerprint_cloudfront_integration.fpjs_secret_manager_arn
            }
        }
    
@@ -46,7 +46,7 @@
        default_cache_behavior {
            allowed_methods = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
            cached_methods = ["GET", "HEAD"]
-           cache_policy_id = aws_cloudfront_cache_policy.fpjs-procdn-cache-policy.id
+           cache_policy_id = module.fingerprint_cloudfront_integration.fpjs_cache_policy_id
            origin_request_policy_id = "216adef6-5c7f-47e4-b989-5492eafa07d3" # Default AllViewer policy
            target_origin_id = local.fpcdn_origin_id
            viewer_protocol_policy = "https-only"
@@ -54,7 +54,7 @@
    
            lambda_function_association {
                event_type = "origin-request"
-               lambda_arn = aws_lambda_function.fpjs_proxy_lambda.qualified_arn
+               lambda_arn = module.fingerprint_cloudfront_integration.fpjs_proxy_lambda_arn
                include_body = true
            }
        }
