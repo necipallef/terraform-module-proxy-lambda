@@ -7,8 +7,7 @@
     ```terraform
     module "fingerprint_cloudfront_integration" {
       source = "git@github.com:necipallef/terraform-module-proxy-lambda.git/?ref=v0.4.0"
-    
-      create_new_distribution  = true
+
       fpjs_agent_download_path = "AGENT_DOWNLOAD_PATH_HERE"
       fpjs_get_result_path = "RESULT_PATH_HERE"
       fpjs_pre_shared_secret = "PROXY_SECRET_HERE"
@@ -82,7 +81,6 @@
     module "fingerprint_cloudfront_integration" {
         source = "git@github.com:necipallef/terraform-module-proxy-lambda.git/?ref=v0.4.0"
 
-        create_new_distribution = false
         fpjs_agent_download_path = "AGENT_DOWNLOAD_PATH_HERE"
         fpjs_get_result_path = "RESULT_PATH_HERE"
         fpjs_pre_shared_secret = "PROXY_SECRET_HERE"
