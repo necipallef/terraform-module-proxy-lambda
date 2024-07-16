@@ -6,7 +6,7 @@
 2. Create a file `touch fingerprint.tf` and add below content, do not forget to replace placeholders (`AGENT_DOWNLOAD_PATH_HERE`, `RESULT_PATH_HERE`, `PROXY_SECRET_HERE`):
     ```terraform
     module "fingerprint_cloudfront_integration" {
-      source = "git@github.com:necipallef/terraform-module-proxy-lambda.git/?ref=v0.3.0"
+      source = "git@github.com:necipallef/terraform-module-proxy-lambda.git/?ref=v0.4.0"
     
       create_new_distribution  = true
       fpjs_agent_download_path = "AGENT_DOWNLOAD_PATH_HERE"
@@ -80,7 +80,7 @@
 1. Create a file called `fingerprint.tf` and add below content, do not forget to replace placeholders (`AGENT_DOWNLOAD_PATH_HERE`, `RESULT_PATH_HERE`, `PROXY_SECRET_HERE`):
     ```terraform
     module "fingerprint_cloudfront_integration" {
-        source = "git@github.com:necipallef/terraform-module-proxy-lambda.git/?ref=v0.3.0"
+        source = "git@github.com:necipallef/terraform-module-proxy-lambda.git/?ref=v0.4.0"
 
         create_new_distribution = false
         fpjs_agent_download_path = "AGENT_DOWNLOAD_PATH_HERE"
