@@ -20,7 +20,6 @@
    }
    
    resource "aws_cloudfront_distribution" "fpjs_cloudfront_distribution" {
-       count = var.create_new_distribution ? 1 : 0
        comment = "Fingerprint distribution (created via Terraform)"
    
        origin {
@@ -71,6 +70,7 @@
        }
    }
    ```
+   If you wish to connect a custom domain for first-party benefits, consider changing `viewer_certificate` field accordingly. Refer to [official documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution) by HashiCorp for further customization.
 4. Run `terraform init`
 5. Run `terraform plan`, if all looks good run `terraform apply`
 
@@ -142,5 +142,4 @@
 > If your project doesn't use `hashicorp/random` module, then you will need to run `terraform init -upgrade`.
 
 ## Todo
-- [ ] Support for `DomainNames` and `ACMCertificateARN` for newly created CloudFront distribution code example
 - [ ] publish on Hashicorp account
