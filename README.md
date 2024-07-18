@@ -10,7 +10,7 @@
      
        fpjs_agent_download_path = "AGENT_DOWNLOAD_PATH_HERE"
        fpjs_get_result_path     = "RESULT_PATH_HERE"
-       fpjs_pre_shared_secret   = "PROXY_SECRET_HERE"
+       fpjs_shared_secret   = "PROXY_SECRET_HERE"
      }
      ```
 3. Create a file called `cloudfront_distribution.tf` and add below content (feel free to make any changes that makes sense for your setup):
@@ -83,7 +83,7 @@
 
         fpjs_agent_download_path = "AGENT_DOWNLOAD_PATH_HERE"
         fpjs_get_result_path     = "RESULT_PATH_HERE"
-        fpjs_pre_shared_secret   = "PROXY_SECRET_HERE"
+        fpjs_shared_secret   = "PROXY_SECRET_HERE"
     }
     
     locals {
