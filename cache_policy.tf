@@ -26,5 +26,6 @@ resource "aws_cloudfront_cache_policy" "fpjs-procdn-cache-policy" {
 }
 
 output "fpjs_cache_policy_id" {
-  value = aws_cloudfront_cache_policy.fpjs-procdn-cache-policy.id
+  value       = aws_cloudfront_cache_policy.fpjs-procdn-cache-policy.id
+  description = "Fingerprint integration cache policy id"
 }

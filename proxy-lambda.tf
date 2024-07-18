@@ -54,5 +54,6 @@ resource "aws_lambda_function" "fpjs_proxy_lambda" {
 }
 
 output "fpjs_proxy_lambda_arn" {
-  value = aws_lambda_function.fpjs_proxy_lambda.qualified_arn
+  value       = aws_lambda_function.fpjs_proxy_lambda.qualified_arn
+  description = "Fingerprint integration proxy lambda ARN"
 }
