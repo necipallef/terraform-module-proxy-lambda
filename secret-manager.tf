@@ -29,13 +29,13 @@ variable "fpjs_shared_secret" {
   }
 }
 
-resource "aws_secretsmanager_secret" "secret-manager-secret-created-by-terraform" {
+resource "aws_secretsmanager_secret" "fpjs_proxy_lambda_secret" {
   name        = "fingerprint-pro-cloudfront-integration-settings-secret-${local.integration_id}"
   description = "AWS Secret with a custom Fingerprint integration settings (created via Terraform)"
 }
 
-resource "aws_secretsmanager_secret_version" "paths" {
-  secret_id = aws_secretsmanager_secret.secret-manager-secret-created-by-terraform.id
+resource "aws_secretsmanager_secret_version" "fpjs_proxy_lambda_secret" {
+  secret_id = aws_secretsmanager_secret.fpjs_proxy_lambda_secret.id
   secret_string = jsonencode(
     {
       fpjs_get_result_path     = var.fpjs_get_result_path
@@ -46,6 +46,6 @@ resource "aws_secretsmanager_secret_version" "paths" {
 }
 
 output "fpjs_secret_manager_arn" {
-  value       = aws_secretsmanager_secret.secret-manager-secret-created-by-terraform.arn
+  value       = aws_secretsmanager_secret.fpjs_proxy_lambda_secret.arn
   description = "Fingerprint secrets integration manager secret ARN"
 }
