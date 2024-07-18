@@ -6,7 +6,7 @@
 2. Create a file `touch fingerprint.tf` and add below content, do not forget to replace placeholders (`AGENT_DOWNLOAD_PATH_HERE`, `RESULT_PATH_HERE`, `PROXY_SECRET_HERE`):
      ```terraform
      module "fingerprint_cloudfront_integration" {
-       source = "git@github.com:necipallef/terraform-module-proxy-lambda.git/?ref=v0.6.0"
+       source = "git@github.com:necipallef/terraform-module-proxy-lambda.git/?ref=v0.7.0"
      
        fpjs_agent_download_path = "AGENT_DOWNLOAD_PATH_HERE"
        fpjs_get_result_path     = "RESULT_PATH_HERE"
@@ -79,7 +79,7 @@
 1. Create a file called `fingerprint.tf` and add below content, do not forget to replace placeholders (`AGENT_DOWNLOAD_PATH_HERE`, `RESULT_PATH_HERE`, `PROXY_SECRET_HERE`):
     ```terraform
     module "fingerprint_cloudfront_integration" {
-        source = "git@github.com:necipallef/terraform-module-proxy-lambda.git/?ref=v0.6.0"
+        source = "git@github.com:necipallef/terraform-module-proxy-lambda.git/?ref=v0.7.0"
 
         fpjs_agent_download_path = "AGENT_DOWNLOAD_PATH_HERE"
         fpjs_get_result_path     = "RESULT_PATH_HERE"
@@ -142,4 +142,5 @@
 > If your project doesn't use `hashicorp/random` module, then you will need to run `terraform init -upgrade`.
 
 ## Todo
+- [ ] create a public repo on company account with name `terraform-aws-fingerprint-cloudfront-integration`
 - [ ] publish on Hashicorp account
