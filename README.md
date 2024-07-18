@@ -93,7 +93,7 @@
     ```
 2. Go to your CloudFront distribution block and add below content, do not forget to replace placeholders (`YOUR_INTEGRATION_PATH_HERE`):
     ```terraform
-        resource "aws_cloudfront_distribution" "cloudfront_dist" {
+    resource "aws_cloudfront_distribution" "cloudfront_dist" {
       // more code here
     
       #region fingerprint start
