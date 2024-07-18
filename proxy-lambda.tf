@@ -17,7 +17,7 @@ resource "aws_iam_role_policy" "lambda_secret_access_policy" {
   role = aws_iam_role.iam_for_lambda.id
 
   policy = jsonencode({
-    Version   = "2012-10-17"
+    Version = "2012-10-17"
     Statement = [
       {
         Action = [
