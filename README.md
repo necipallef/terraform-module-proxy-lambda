@@ -82,11 +82,6 @@
         fpjs_get_result_path     = "RESULT_PATH_HERE"
         fpjs_shared_secret   = "PROXY_SECRET_HERE"
     }
-    
-    locals {
-        fpcdn_origin_id = "fpcdn.io"
-    }
-
     ```
 2. Go to your CloudFront distribution block and add below content, do not forget to replace placeholders (`YOUR_INTEGRATION_PATH_HERE`):
     ```terraform
