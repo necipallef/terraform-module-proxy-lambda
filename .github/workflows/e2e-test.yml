@@ -31,7 +31,7 @@ jobs:
 
   deploy:
     name: Deploy the project
-    needs: [validate]
+    needs: [ validate ]
     runs-on: ubuntu-latest
     steps:
       - name: "check env"
@@ -40,6 +40,9 @@ jobs:
       - name: "check if AWS_ACCESS_KEY_ID exists"
         if: ${{ vars.AWS_ACCESS_KEY_ID == '' }}
         run: echo AWS_ACCESS_KEY_ID is empty!
+
+      - name: necip
+        run: echo ${{ vars.NECIP }}
 
       - name: Install terraform
         uses: hashicorp/setup-terraform@v3
@@ -67,7 +70,7 @@ jobs:
 
   test:
     name: Test the project
-    needs: [deploy]
+    needs: [ deploy ]
     runs-on: ubuntu-latest
     steps:
       - name: Run playwright
