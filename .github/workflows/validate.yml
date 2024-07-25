@@ -32,9 +32,9 @@ jobs:
       - name: Create required parameters
         run: |
           touch terraform.tfvars
-          echo fpjs_agent_download_path = "agent" >> terraform.tfvars
-          echo fpjs_get_result_path = "result" >> terraform.tfvars
-          echo fpjs_shared_secret = "secret" >> terraform.tfvars
+          echo "fpjs_agent_download_path = \"agent\"" >> terraform.tfvars
+          echo "fpjs_get_result_path = \"result\"" >> terraform.tfvars
+          echo "fpjs_shared_secret = \"secret\"" >> terraform.tfvars
 
       - name: Run 'terraform plan'
         run: terraform plan -input=false
