@@ -33,7 +33,6 @@ jobs:
     name: Deploy the project
     needs: [validate]
     runs-on: ubuntu-latest
-    environment: e2e_test
     steps:
       - name: "check env"
         run: env
