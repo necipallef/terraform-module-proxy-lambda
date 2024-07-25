@@ -47,11 +47,11 @@ jobs:
         if: ${{ env.secret2 == '' }}
         run: echo NECIP is empty!
       - name: "check if AWS_ACCESS_KEY_ID exists"
-        if: ${{ env.AWS_ACCESS_KEY_ID == '' }}
+        if: ${{ vars.AWS_ACCESS_KEY_ID == '' }}
         run: echo AWS_ACCESS_KEY_ID is empty!
 
       - name: "check if NECIP2 exists"
-        if: ${{ env.NECIP2 == '' }}
+        if: ${{ vars.NECIP2 == '' }}
         run: echo NECIP2 is empty!
 
       - name: Install terraform
