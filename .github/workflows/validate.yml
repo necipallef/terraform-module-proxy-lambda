@@ -29,5 +29,12 @@ jobs:
       - name: Run 'terraform validate'
         run: terraform validate
 
+      - name: Create required parameters
+        run: |
+          touch terraform.tfvars
+          echo fpjs_agent_download_path = "agent"
+          echo fpjs_get_result_path = "result"
+          echo fpjs_shared_secret = "secret"
+
       - name: Run 'terraform plan'
         run: terraform plan -input=false
