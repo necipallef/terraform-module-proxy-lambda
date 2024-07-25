@@ -44,6 +44,9 @@ jobs:
       - name: necip
         run: echo ${{ vars.NECIP }}
 
+      - name: NECIP_A_B
+        run: echo ${{ vars.NECIP_A_B }}
+
       - name: Install terraform
         uses: hashicorp/setup-terraform@v3
 
