@@ -1,7 +1,16 @@
 module "fingerprint_cloudfront_integration" {
-  source = "../"
+  source                   = "../"
+  fpjs_agent_download_path = var.fpjs_agent_download_path
+  fpjs_get_result_path     = var.fpjs_get_result_path
+  fpjs_shared_secret       = var.fpjs_shared_secret
+}
 
-  fpjs_agent_download_path = "agent"
-  fpjs_get_result_path     = "result"
-  fpjs_shared_secret       = "secret"
+variable "fpjs_agent_download_path" {
+  type = string
+}
+variable "fpjs_get_result_path" {
+  type = string
+}
+variable "fpjs_shared_secret" {
+  type = string
 }
