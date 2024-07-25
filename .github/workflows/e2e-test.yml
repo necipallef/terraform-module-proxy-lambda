@@ -35,6 +35,25 @@ jobs:
     runs-on: ubuntu-latest
     environment: e2e_test
     steps:
+      - name: "check if AWS_SECRET_ACCESS_KEY exists"
+        env:
+          secret1: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        if: ${{ env.secret1 == '' }}
+        run: echo AWS_SECRET_ACCESS_KEY is empty!
+
+      - name: "check if NECIP exists"
+        env:
+          secret2: ${{ secrets.NECIP }}
+        if: ${{ env.secret2 == '' }}
+        run: echo NECIP is empty!
+      - name: "check if AWS_ACCESS_KEY_ID exists"
+        if: ${{ env.AWS_ACCESS_KEY_ID == '' }}
+        run: echo AWS_ACCESS_KEY_ID is empty!
+
+      - name: "check if NECIP2 exists"
+        if: ${{ env.NECIP2 == '' }}
+        run: echo NECIP2 is empty!
+
       - name: Install terraform
         uses: hashicorp/setup-terraform@v3
 
