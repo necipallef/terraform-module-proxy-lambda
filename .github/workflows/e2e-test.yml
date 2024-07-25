@@ -41,7 +41,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: env
-        run: echo env
+        run: env
 
       - name: Checkout the project
         uses: actions/checkout@v4
