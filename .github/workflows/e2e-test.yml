@@ -8,9 +8,20 @@ on:
 
 jobs:
   deploy:
-    name: Init
-    run: echo init
+    name: Deploy the project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Checkout the project
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
   test:
-    name: Test
-    run: echo test
+    name: Test the project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run playwright
+        run: echo playwright!
