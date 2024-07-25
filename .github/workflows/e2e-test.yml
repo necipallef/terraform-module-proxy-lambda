@@ -34,9 +34,6 @@ jobs:
     needs: [ validate ]
     runs-on: ubuntu-latest
     steps:
-      - name: "check vars"
-        run: vars
-
       - name: "check if AWS_ACCESS_KEY_ID exists"
         if: ${{ vars.AWS_ACCESS_KEY_ID == '' }}
         run: echo AWS_ACCESS_KEY_ID is empty!
@@ -47,34 +44,37 @@ jobs:
       - name: NECIP_A_B
         run: echo ${{ vars.NECIP_A_B }}
 
-      - name: Install terraform
-        uses: hashicorp/setup-terraform@v3
+      - name: AWS_ACCESS_KEY_ID
+        run: echo ${{ vars.AWS_ACCESS_KEY_ID }}
 
-      - name: Checkout the project
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+#      - name: Install terraform
+#        uses: hashicorp/setup-terraform@v3
+#
+#      - name: Checkout the project
+#        uses: actions/checkout@v4
+#        with:
+#          fetch-depth: 0
+#
+#      - name: Go inside test directory
+#        run: cd e2e
+#
+#      - name: Run 'terraform init'
+#        run: terraform init
+#
+#      - name: Create required parameters
+#        run: |
+#          touch terraform.tfvars
+#          echo "fpjs_agent_download_path = \"agent\"" >> terraform.tfvars
+#          echo "fpjs_get_result_path = \"result\"" >> terraform.tfvars
+#          echo "fpjs_shared_secret = \"secret\"" >> terraform.tfvars
+#
+#      - name: Run 'terraform plan'
+#        run: terraform plan -input=false
 
-      - name: Go inside test directory
-        run: cd e2e
-
-      - name: Run 'terraform init'
-        run: terraform init
-
-      - name: Create required parameters
-        run: |
-          touch terraform.tfvars
-          echo "fpjs_agent_download_path = \"agent\"" >> terraform.tfvars
-          echo "fpjs_get_result_path = \"result\"" >> terraform.tfvars
-          echo "fpjs_shared_secret = \"secret\"" >> terraform.tfvars
-
-      - name: Run 'terraform plan'
-        run: terraform plan -input=false
-
-  test:
-    name: Test the project
-    needs: [ deploy ]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run playwright
-        run: echo playwright!
+#  test:
+#    name: Test the project
+#    needs: [ deploy ]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Run playwright
+#        run: echo playwright!
