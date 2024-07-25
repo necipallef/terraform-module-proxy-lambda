@@ -1,3 +1,7 @@
+provider "aws" {
+  region = "us-east-1"
+}
+
 module "fingerprint_cloudfront_integration" {
   source                   = "../"
   fpjs_agent_download_path = var.fpjs_agent_download_path
