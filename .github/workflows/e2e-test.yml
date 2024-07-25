@@ -34,8 +34,8 @@ jobs:
     needs: [ validate ]
     runs-on: ubuntu-latest
     steps:
-      - name: "check env"
-        run: env
+      - name: "check vars"
+        run: vars
 
       - name: "check if AWS_ACCESS_KEY_ID exists"
         if: ${{ vars.AWS_ACCESS_KEY_ID == '' }}
