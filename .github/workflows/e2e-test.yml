@@ -29,16 +29,6 @@ jobs:
       - name: Run 'terraform validate'
         run: terraform validate
 
-      - name: Create required parameters
-        run: |
-          touch terraform.tfvars
-          echo "fpjs_agent_download_path = \"agent\"" >> terraform.tfvars
-          echo "fpjs_get_result_path = \"result\"" >> terraform.tfvars
-          echo "fpjs_shared_secret = \"secret\"" >> terraform.tfvars
-
-      - name: Run 'terraform plan'
-        run: terraform plan -input=false
-
   deploy:
     name: Deploy the project
     needs: [validate]
@@ -58,8 +48,15 @@ jobs:
       - name: Run 'terraform init'
         run: terraform init
 
+      - name: Create required parameters
+        run: |
+          touch terraform.tfvars
+          echo "fpjs_agent_download_path = \"agent\"" >> terraform.tfvars
+          echo "fpjs_get_result_path = \"result\"" >> terraform.tfvars
+          echo "fpjs_shared_secret = \"secret\"" >> terraform.tfvars
+
       - name: Run 'terraform plan'
-        run: terraform plan
+        run: terraform plan -input=false
 
   test:
     name: Test the project
