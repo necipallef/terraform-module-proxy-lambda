@@ -33,6 +33,7 @@ jobs:
     name: Deploy the project
     needs: [validate]
     runs-on: ubuntu-latest
+    environment: e2e_test
     steps:
       - name: Install terraform
         uses: hashicorp/setup-terraform@v3
