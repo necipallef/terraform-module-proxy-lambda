@@ -63,13 +63,8 @@ jobs:
       - name: Run 'terraform plan'
         run: terraform plan -input=false
 
-      - name: Create file
-        run: |
-          touch terraform.tfstate
-          echo 1234 > terraform.tfstate
-
-#      - name: Run 'terraform apply'
-#        run: terraform apply -auto-approve
+      - name: Run 'terraform apply'
+        run: terraform apply -auto-approve -input=false
 
       - name: Cache state files
         uses: actions/cache/save@v4
@@ -110,8 +105,5 @@ jobs:
           key: terraform.tfstate
           path: terraform.tfstate
 
-      - name: ls
-        run: ls
-
-      - name: Read file
-        run: cat terraform.tfstate
+      - name: Run 'terraform destroy'
+        run: terraform destroy -auto-approve
