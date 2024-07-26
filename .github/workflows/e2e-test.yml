@@ -63,6 +63,17 @@ jobs:
       - name: Run 'terraform plan'
         run: terraform plan -input=false
 
+      - name: Create a file
+        run: |
+          touch sa.txt
+          echo 123 > sa.txt
+
+      - name: Cache lock file
+        uses: actions/cache/save@v4
+        with:
+          key: sa.txt
+          path: sa.txt
+
   test:
     name: Test the project
     needs: [ deploy ]
@@ -70,3 +81,20 @@ jobs:
     steps:
       - name: Run playwright
         run: echo playwright!
+
+  cleanup:
+    name: Clean up resources creating via Terraform
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get file from cache
+        uses: actions/cache/restore@v4
+        with:
+          key: sa.txt
+          path: sa.txt
+
+      - name: ls
+        run: ls
+
+      - name: Read file
+        run: cat sa.txt
