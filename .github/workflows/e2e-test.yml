@@ -7,6 +7,11 @@ on:
     paths-ignore:
       - '**.md'
 
+env:
+  TF_LOG: INFO
+  AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
 jobs:
   validate:
     name: Validate
