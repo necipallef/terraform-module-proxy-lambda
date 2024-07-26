@@ -63,16 +63,19 @@ jobs:
       - name: Run 'terraform plan'
         run: terraform plan -input=false
 
-      - name: Create a file
+      - name: Create file
         run: |
-          touch sa.txt
-          echo 123 > sa.txt
+          touch terraform.tfstate
+          echo 1234 > terraform.tfstate
 
-      - name: Cache lock file
+#      - name: Run 'terraform apply'
+#        run: terraform apply -auto-approve
+
+      - name: Cache state files
         uses: actions/cache/save@v4
         with:
-          key: sa.txt
-          path: sa.txt
+          key: terraform.tfstate
+          path: terraform.tfstate
 
   test:
     name: Test the project
@@ -87,14 +90,28 @@ jobs:
     needs: [ test ]
     runs-on: ubuntu-latest
     steps:
+      - name: Install terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Checkout the project
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Go inside test directory
+        run: cd e2e
+
+      - name: Run 'terraform init'
+        run: terraform init
+
       - name: Get file from cache
         uses: actions/cache/restore@v4
         with:
-          key: sa.txt
-          path: sa.txt
+          key: terraform.tfstate
+          path: terraform.tfstate
 
       - name: ls
         run: ls
 
       - name: Read file
-        run: cat sa.txt
+        run: cat terraform.tfstate
