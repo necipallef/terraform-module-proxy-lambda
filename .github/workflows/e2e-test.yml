@@ -106,4 +106,7 @@ jobs:
           path: terraform.tfstate
 
       - name: Run 'terraform destroy'
-        run: terraform destroy -auto-approve
+        run: terraform destroy -auto-approve \
+          -var fpjs_agent_download_path=arbitrary_value \
+          -var fpjs_get_result_path=arbitrary_value \
+          -var fpjs_shared_secret=arbitrary_value
