@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-west-1"
+  region = "us-east-1a"
 }
 
 module "fingerprint_cloudfront_integration" {
