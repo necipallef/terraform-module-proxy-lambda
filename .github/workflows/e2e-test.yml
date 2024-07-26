@@ -69,7 +69,7 @@ jobs:
       - name: Cache state files
         uses: actions/cache/save@v4
         with:
-          key: terraform.tfstate
+          key: terraform.tfstate-${{ hashFiles('terraform.tfstate') }}
           path: terraform.tfstate
 
   test:
@@ -102,7 +102,7 @@ jobs:
       - name: Get file from cache
         uses: actions/cache/restore@v4
         with:
-          key: terraform.tfstate
+          key: terraform.tfstate-${{ hashFiles('terraform.tfstate') }}
           path: terraform.tfstate
 
       - name: Run 'terraform destroy'
