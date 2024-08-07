@@ -1,3 +1,12 @@
+<p align="center">
+  <a href="https://fingerprint.com">
+    <picture>
+     <img src="./assets/logo_dark.svg" alt="Fingerprint logo" width="312px" />
+   </picture>
+  </a>
+</p>
+
+
 ## How to Install
 
 ### Using a new CloudFront distribution
