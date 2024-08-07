@@ -1,8 +1,6 @@
 <p align="center">
   <a href="https://fingerprint.com">
-    <picture>
-     <img src="./assets/logo_dark.svg" alt="Fingerprint logo" width="312px" />
-   </picture>
+    ![Logo](assets/logo_grey.svg)
   </a>
 </p>
 
