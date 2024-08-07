@@ -1,6 +1,6 @@
 name: e2e test
 on:
-  workflow_dispatch:
+  workflow_dispatch: # todo remove
   pull_request:
     branches:
       - main
@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install terraform
-        uses: hashicorp/setup-terraform@v3
+        uses: hashicorp/setup-terraform@651471c36a6092792c552e8b1bef71e592b462d8
 
       - name: Checkout the project
         uses: actions/checkout@v4
@@ -81,7 +81,7 @@ jobs:
         run: echo playwright!
 
   cleanup:
-    name: Clean up resources creating via Terraform
+    name: Destroy the project
     needs: [ test ]
     runs-on: ubuntu-latest
     steps:
