@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://fingerprint.com">
     <picture>
-     <img src="https://github.com/necipallef/terraform-module-proxy-lambda/blob/main/assets/logo_grey.svg" alt="Fingerprint logo" width="312px" />
+      <img src="assets/logo_grey.svg" alt="Fingerprint logo" width="312px" />
    </picture>
   </a>
 </p>
